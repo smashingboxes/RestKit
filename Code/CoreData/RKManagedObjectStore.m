@@ -79,7 +79,10 @@ static NSString* const RKManagedObjectStoreThreadDictionaryEntityCacheKey = @"RK
 		
         if (nilOrManagedObjectModel == nil) {
             // NOTE: allBundles permits Core Data setup in unit tests
-			nilOrManagedObjectModel = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
+			//nilOrManagedObjectModel = [NSManagedObjectModel mergedModelFromBundles:[NSBundle allBundles]];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"almaDataModel" ofType:@"momd"];
+            NSURL *momURL = [NSURL fileURLWithPath:path];
+            nilOrManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
         }
 		_managedObjectModel = [nilOrManagedObjectModel retain];
 		
